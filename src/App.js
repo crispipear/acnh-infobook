@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './global.scss';
 
 import {getData, create} from './utils/fb';
-import FishData from './db/fish';
 import getAvailability from './utils/availability';
 
 import Header  from './components/Header';
@@ -10,6 +9,7 @@ import Main    from './components/Main';
 import Menu    from './components/Menu';     
 
 function App() {
+  const [fbData, setFbData] = useState({fish: {}, bugs: {}})
   const [data, setData] = useState({});
   const [dataset, setDataset] = useState({}); //unfiltered dataset from firebase
   const [type, setType] = useState('fish'); 
@@ -18,9 +18,13 @@ function App() {
   const [avai, setAvai] = useState(1) //availability
 
   useEffect(() => {
-    // getData();
+    fetchData();
     // create();
   }, [])
+
+  function fetchData(){
+    getData(setFbData)
+  }
 
   useEffect(() => {
     let filtered = Object.assign({}, dataset);
@@ -48,11 +52,10 @@ function App() {
   }, [loc, avai, north])
 
   useEffect(() => {
-    // let dataset = type == 'fish' ? FishData : BugsData
-    let dataset = FishData;
+    let dataset = type == 'fish' ? fbData.fish : fbData.bugs;
     setDataset(dataset);
     setData(dataset);
-  }, [type])
+  }, [fbData])
 
   function search(e){
     if(e.keyCode == 13){

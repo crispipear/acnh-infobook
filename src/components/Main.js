@@ -20,7 +20,9 @@ export default function Main(props) {
                 {
                     Object.keys(data).map(item => 
                         <div className="list-item" key={item}>
-                            <div className="list-col"><div className='list-img-temp'/></div>
+                            <div className="list-col">
+                                <img src={data[item].img} alt={data[item].name}/>
+                            </div>
                             <div className="list-col"><span>{data[item].name}</span></div>
                             <div className="list-col"><span>{data[item].price || 'N/A'}</span></div>
                             <div className="list-col"><span>{data[item].location || 'N/A'}</span></div>
