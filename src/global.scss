@@ -1,0 +1,98 @@
+$primBlue: #9BDCE2;
+$primGreen: #7CB4AC;
+$background: #FFFEFD;
+$text: #336367;
+$secGreen: #EAFFFC;
+$gray: #CCDBDD;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: $secGreen;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+.container{
+  width: 80%;
+  box-sizing: border-box;
+  margin: 0 10vw;
+}
+
+#bg-pattern{
+  background-position: center;
+  background-size: cover;
+  background-image: url('./assets/leaf-pattern.jpg');
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a,p,span,b{
+  font-size: 0.96rem;
+  font-weight: 400;
+  line-height: 1.4;
+  @extend .color-text;
+}
+
+h1,h2,h3,h4,h5,h6{
+  margin: 0%;
+  font-weight: 600;
+  line-height: 1.6;
+  @extend .color-text;
+}
+
+h1{font-size: 2rem}
+h2{font-size: 1.75rem}
+h3{font-size: 1.5rem}
+h4{font-size: 1.2rem}
+h5{font-size: 1.1rem}
+h6{font-size: 1rem}
+
+.color-green{
+  color: $primGreen
+}
+.color-text{
+  color: $text
+}
+
+#menu{
+  @extend .container;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 24vh;
+  .left,.right{
+    flex: 1;
+  }
+  .right{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+#main{
+  @extend .container;
+  height: 80vh;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: $background;
+  border: 0.5rem $primBlue solid;
+}
