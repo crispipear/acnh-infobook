@@ -4,7 +4,7 @@ import 'firebase/database';
 import 'firebase/firestore';
 
 //static db backup
-import fish from '../db/fish';
+import fish from '../db/fishData';
 
 const apiKey = process.env.REACT_APP_FB_KEY;
 

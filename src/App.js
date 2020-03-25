@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './global.scss';
+import './styles/global.scss';
 
 import {getData, create} from './utils/fb';
 import getAvailability from './utils/availability';
@@ -10,6 +10,7 @@ import Menu    from './components/Menu';
 
 function App() {
   const [fbData, setFbData] = useState({fish: {}, bugs: {}})
+  const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState({});
   const [dataset, setDataset] = useState({}); //unfiltered dataset from firebase
   const [type, setType] = useState('fish'); 
@@ -23,7 +24,9 @@ function App() {
   }, [])
 
   function fetchData(){
-    getData(setFbData)
+    getData(setFbData).then(() => {
+      setLoaded(true);
+    })
   }
 
   useEffect(() => {
@@ -44,7 +47,7 @@ function App() {
             if(!months.includes(curMonth) || months.includes(curMonth+1)) delete filtered[key];
           }
         }else if(avai == 3){ //filter available now
-          if(!getAvailability(filtered[key], north)) delete filtered[key]
+          if(!getAvailability(filtered[key], north, type)) delete filtered[key]
         }
       })
     }
@@ -70,11 +73,11 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="app">
       <div id="bg-pattern"/>
       <Menu type={type} setType={setType} setNorth={setNorth} setLoc={setLoc} setAvai={setAvai} search={search}/>
       <Header/>
-      <Main data={data} north={north} type={type}/>
+      <Main data={data} north={north} type={type} loaded={loaded}/>
     </div>
   );
 }

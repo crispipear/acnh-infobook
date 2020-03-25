@@ -13,20 +13,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: $secGreen;
+}
+.app{
   width: 100%;
   height: 100vh;
   position: relative;
 }
 .container{
-  width: 85%;
+  width: 88%;
   box-sizing: border-box;
-  margin: 0 7.5%;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0%);
 }
-
 #bg-pattern{
   background-position: center;
   background-size: cover;
-  background-image: url('./assets/leaf-pattern.jpg');
+  background-image: url('../assets/leaf-pattern.jpg');
   width: 100%;
   height: 100%;
   position: absolute;
@@ -50,7 +53,7 @@ a,p,span{
 }
 b{
   color: $primGreen;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -79,10 +82,8 @@ h6{font-size: 0.9rem}
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 24vh;
+  height: 20vh;
+  top: 0%;
   .left,.right{
     flex: 1;
     display: flex;
@@ -104,14 +105,12 @@ h6{font-size: 0.9rem}
 
 #main{
   @extend .container;
-  height: 80vh;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   background: $background;
   border: 0.5rem $primBlue solid;
   border-bottom: none;
   overflow-y: scroll;
+  height: 80vh;
+  bottom: 0%;
 }
 
 #list{
@@ -119,7 +118,7 @@ h6{font-size: 0.9rem}
   box-sizing: border-box;
   right: 0;
   top: 0;
-  width: 84%;
+  width: 83%;
   display: flex;
   flex-direction: column;
 }
@@ -131,7 +130,7 @@ h6{font-size: 0.9rem}
 .list-item{
   display: grid;
   padding: 1.6rem;
-  grid-template-columns: 1fr 3fr 2fr 2fr 2fr 2.25fr 2.75fr 1.25fr;
+  grid-template-columns: 1fr 3fr 1.5fr 2fr 1.5fr 2.25fr 2.75fr 1.25fr;
   column-gap: 1rem;
   &:nth-child(even){
     background-color: rgba($gray, 0.2);
@@ -164,9 +163,9 @@ h6{font-size: 0.9rem}
 #menu{
   z-index: 1;
   position: fixed;
-  left: 8%;
+  left: 6.5%;
   bottom: 0.5rem;
-  width: 13.5%;
+  width: 15%;
   height: 77.5%;
   box-sizing: border-box;
   padding: 1rem;
@@ -273,7 +272,8 @@ input{
 .dropdown-list{
   z-index: 1;
   max-height: 6rem;
-  overflow: scroll!important;
+  overflow-y: scroll!important;
+  overflow-x: hidden;
   background: $background;
   border: 1px solid $gray;
   position: absolute;
@@ -281,7 +281,6 @@ input{
   border-radius: 8px;
   top: 2.4rem;
   left: 0%;
-  overflow: hidden;
 }
 
 .dropdown-item{
@@ -307,4 +306,12 @@ input{
   padding: 3px;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
+
+#loader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60vh;
 }

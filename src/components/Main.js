@@ -18,6 +18,7 @@ export default function Main(props) {
                     }
                 </div>
                 {
+                    props.loaded?
                     Object.keys(data).map(item => 
                         <div className="list-item" key={item}>
                             <div className="list-col">
@@ -37,13 +38,17 @@ export default function Main(props) {
                             </div>
                             <div className="list-col">
                                     {
-                                        getAvailability(data[item], props.north)
+                                        getAvailability(data[item], props.north, props.type)
                                         ? <span className="text-hl">YAS</span>
                                         : <span className="text-d">No</span>
                                     }
                             </div>
                         </div>
                     )
+                    :
+                    <div id="loader">
+                        <h4>loading...</h4>
+                    </div>
                 }
             </div>
         </div>
