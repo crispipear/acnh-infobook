@@ -1,9 +1,3 @@
-//1 = allday, 2 = 9am-4pm, 3 = 4pm-9am
-//4 = 9am-4pm, 9pm-4am
-//5 = 9pm-4am
-//6 = 4am-9pm
-//7 = 6pm-4am
-//8 = rainy all day
 export default {
     "bitterling": {
         name: 'Bitterling',
@@ -114,7 +108,7 @@ export default {
         price: 5000,
         location: 'River',
         size: null,
-        time: 2,
+        time: 7,
         allYear: false,
         monthsN: [4,5,6,7,8,9,10],
         monthsS: [10,11,12,1,2,3,4]
@@ -246,17 +240,17 @@ export default {
     "cherry-salmon": {
         name: 'Cherry Salmon',
         price: 1000,
-        location: 'River',
+        location: 'R-Clifftop',
         size: 3,
-        time: 1,
+        time: 3,
         allYear: false,
-        monthsN: [3,4,5,6,9,10,11],
-        monthsS: [3,4,5,9,10,11,12]
+        monthsN: [3,4,5,9,10,11],
+        monthsS: [3,4,5,9,10,11]
     },
     "char": {
         name: 'Char',
         price: 3800,
-        location: 'River/Pond',
+        location: 'R-Clifftop/Pond',
         size: 3,
         time: 3,
         allYear: false,
@@ -398,7 +392,7 @@ export default {
         price: 15000,
         location: 'River',
         size: 5,
-        time: 3,
+        time: 5,
         allYear: false,
         monthsN: [6,7,8,9],
         monthsS: [12,1,2,3]
@@ -428,7 +422,7 @@ export default {
         price: 4000,
         location: 'River',
         size: 4,
-        time: 5,
+        time: 7,
         allYear: false,
         monthsN: [12,1,2,3],
         monthsS: [6,7,8,9]
@@ -498,7 +492,7 @@ export default {
         price: 10000,
         location: 'Sea',
         size: 6,
-        time: 6,
+        time: 5,
         allYear: false,
         monthsN: [7,8],
         monthsS: [1,2]
@@ -518,7 +512,7 @@ export default {
         price: null,
         location: 'Sea',
         size: 3,
-        time: 7,
+        time: 6,
         allYear: false,
         monthsN: [11,12,1,2],
         monthsS: [5,6,7,8]
@@ -538,7 +532,7 @@ export default {
         price: 200,
         location: 'Sea',
         size: 2,
-        time: 2,
+        time: 5,
         allYear: true
     },
     "horse-mackerel": {
@@ -668,7 +662,7 @@ export default {
         price: 4000,
         location: 'Sea',
         size: 6,
-        time: 6,
+        time: 5,
         allYear: false,
         monthsN: [7,8,9],
         monthsS: [1,2,3]
@@ -678,7 +672,7 @@ export default {
         price: 3000,
         location: 'Sea',
         size: 5,
-        time: 6,
+        time: 5,
         allYear: false,
         monthsN: [8,9,10,11],
         monthsS: [2,3,4,5]
@@ -758,7 +752,7 @@ export default {
         price: 15000,
         location: 'Sea',
         size: 2,
-        time: 5,
+        time: 7,
         allYear: true
     },
     "coelacanth": {
@@ -766,7 +760,7 @@ export default {
         price: 15000,
         location: 'Sea',
         size: 6,
-        time: 8,
+        time: 1,
         allYear:true
     }
 }

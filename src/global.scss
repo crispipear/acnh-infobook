@@ -1,4 +1,4 @@
-$primBlue: #9BDCE2;
+$primBlue: #8fd3da;
 $primGreen: #7CB4AC;
 $background: #FFFEFD;
 $text: #336367;
@@ -18,9 +18,9 @@ body {
   position: relative;
 }
 .container{
-  width: 80%;
+  width: 85%;
   box-sizing: border-box;
-  margin: 0 10vw;
+  margin: 0 7.5%;
 }
 
 #bg-pattern{
@@ -41,10 +41,16 @@ code {
 }
 
 a,p,span,b{
-  font-size: 0.96rem;
-  font-weight: 400;
+  font-size: 0.9rem;
   line-height: 1.4;
+}
+a,p,span{
+  font-weight: 400;
   @extend .color-text;
+}
+b{
+  color: $primGreen;
+  font-weight: 500;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -58,8 +64,8 @@ h1{font-size: 2rem}
 h2{font-size: 1.75rem}
 h3{font-size: 1.5rem}
 h4{font-size: 1.2rem}
-h5{font-size: 1.1rem}
-h6{font-size: 1rem}
+h5{font-size: 1rem}
+h6{font-size: 0.9rem}
 
 .color-green{
   color: $primGreen
@@ -68,7 +74,7 @@ h6{font-size: 1rem}
   color: $text
 }
 
-#menu{
+#header{
   @extend .container;
   display: flex;
   flex-direction: row;
@@ -79,10 +85,17 @@ h6{font-size: 1rem}
   height: 24vh;
   .left,.right{
     flex: 1;
-  }
-  .right{
     display: flex;
     flex-direction: row;
+  }
+  .left{
+    img{
+      width: 16%;
+      margin: 0 0.8rem;
+    }
+    align-items: center;
+  }
+  .right{
     justify-content: flex-end;
   }
 }
@@ -95,4 +108,191 @@ h6{font-size: 1rem}
   left: 0;
   background: $background;
   border: 0.5rem $primBlue solid;
+  border-bottom: none;
+  overflow-y: scroll;
+}
+
+#list{
+  position: absolute;
+  box-sizing: border-box;
+  right: 0;
+  top: 0;
+  width: 84%;
+  display: flex;
+  flex-direction: column;
+}
+
+#list-header{
+  border-bottom: 1px $gray solid;
+}
+
+.list-item{
+  display: grid;
+  padding: 1.6rem 1rem;
+  grid-template-columns: 2fr 3fr 2fr 2fr 2fr 2.25fr 2.75fr 1.25fr;
+  column-gap: 1rem;
+  &:nth-child(even){
+    background-color: rgba($gray, 0.2);
+  }
+}
+.list-img-temp{
+  width: 50px;
+  height: 50px;
+  background: $gray;
+}
+
+.list-col{
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  &:first-of-type{
+    justify-content: center;
+  }
+}
+
+#menu{
+  z-index: 1;
+  position: fixed;
+  left: 8%;
+  bottom: 0.5rem;
+  width: 13.5%;
+  height: 77.5%;
+  box-sizing: border-box;
+  padding: 1rem;
+  border-right: $gray 1px solid;
+}
+
+.menu-group{
+  margin-bottom: 1.2rem;
+  h6{
+    margin-bottom: 0.5rem;
+  }
+  button{
+      width: 100%;
+  } 
+}
+
+button{
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: 0.8rem;
+  padding: 0.6rem 0;
+  border-radius: 24px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: $gray;
+  color: white;
+  letter-spacing: 0.06rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  &:hover{
+    background: $primGreen;
+    -webkit-box-shadow: 0px 4px 8px 0px rgba(24,54,56,0.1);
+    -moz-box-shadow: 0px 4px 8px 0px rgba(24,54,56,0.1);
+    box-shadow: 0px 4px 8px 0px rgba(24,54,56,0.1);
+  }
+}
+
+.btn-active{
+  background: $primBlue;
+}
+
+#month{
+  width: 4rem;
+  height: 3rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  row-gap: 0.3rem;
+  column-gap: 0.3rem;
+}
+
+.month-item{
+  font-size: 0.8rem;
+}
+
+.text-d, .month-item{
+  color: rgba($text, 0.4);
+}
+
+.month-highlight, .text-hl{
+  color: $primGreen;
+  font-weight: 600;
+}
+
+input, .dropdown{
+  height: 2rem;
+  border: 1px solid $gray;
+  border-radius: 8px;
+}
+
+input{
+  outline: none;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  &:focus{
+    border-color: $primBlue;
+  }
+}
+
+.dropdown{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+  &:hover{
+    border-color: $primBlue;
+  }
+}
+.dropdown-current{
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-list{
+  z-index: 1;
+  max-height: 6rem;
+  overflow: scroll!important;
+  background: $background;
+  border: 1px solid $gray;
+  position: absolute;
+  width: 100%;
+  border-radius: 8px;
+  top: 2.4rem;
+  left: 0%;
+  overflow: hidden;
+}
+
+.dropdown-item{
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0.4rem 1rem;
+  box-sizing: border-box;
+  span{
+    transition: all 0.2s;
+  }
+  &:hover{
+    background: $secGreen;
+    span{
+      font-weight: 600;
+    }
+  }
+}
+
+.dropdown-arrow{
+  border: solid $primBlue;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }

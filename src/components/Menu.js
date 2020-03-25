@@ -1,42 +1,30 @@
 import React, { useState, useEffect } from 'react';
-
-const dateOption = {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
-}
+import Dropdown from './Dropdown';
+import Options from '../utils/options';
 
 export default function Menu(props) {
-    const [timer, setTimer] = useState(null);
-    const [timerText, setTimerText] = useState(new Date().toLocaleTimeString('en-US', dateOption))
-
-    useEffect(() => {
-        startTimer();
-        return () => {
-           clearInterval(timer);
-           timer = null;
-        };
-    }, []);
-
-    function startTimer(){
-        if(timer == null){
-            setTimer(
-                setInterval(() => {
-                    setTimerText(new Date().toLocaleTimeString('en-US', dateOption))
-                }, 60000)
-            )
-        }
-    }
-
     return (
         <div id='menu'>
-            <div className='left'>
-                <h1>ACNH Info Book</h1>
+            <div className='menu-group'>
+                <h6>Type</h6>
+                <button onClick={() => props.setType('fish')}className={props.type=='fish' ? 'btn-active': ''}>FISH</button>
+                <button onClick={()=>alert('not done yet')} className={props.type=='bugs' ? 'btn-active': ''}>BUGS</button>
             </div>
-            <div className='right'>
-                <h4>Current Time: {timerText}</h4>
+            <div className='menu-group'>
+                <h6>Hemisphere</h6>
+                <Dropdown items={Options.hemisphere} setValue={props.setNorth}/>
+            </div>
+            <div className='menu-group'>
+                <h6>Location</h6>
+                <Dropdown items={Options.location} setValue={props.setLoc}/>
+            </div>
+            <div className='menu-group'>
+                <h6>Availability</h6>
+                <Dropdown items={Options.availability} setValue={props.setAvai}/>
+            </div>
+            <div className='menu-group'>
+                <h6>Search</h6>
+                <input type="text"/>
             </div>
         </div>
     );
