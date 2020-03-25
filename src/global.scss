@@ -87,13 +87,15 @@ h6{font-size: 0.9rem}
     flex: 1;
     display: flex;
     flex-direction: row;
+    align-items: center;
+  }
+  img{
+    width: 16%;
   }
   .left{
-    img{
-      width: 16%;
+    h1{
       margin: 0 0.8rem;
     }
-    align-items: center;
   }
   .right{
     justify-content: flex-end;
@@ -148,6 +150,11 @@ h6{font-size: 0.9rem}
   align-items: center;
   &:first-of-type{
     justify-content: center;
+  }
+  &:nth-of-type(2){
+    span{
+      font-weight: 600;
+    }
   }
 }
 
@@ -229,9 +236,11 @@ input, .dropdown{
 }
 
 input{
+  width: 100%;
   outline: none;
   padding: 0 1rem;
   box-sizing: border-box;
+  font-size: 0.92rem;
   &:focus{
     border-color: $primBlue;
   }

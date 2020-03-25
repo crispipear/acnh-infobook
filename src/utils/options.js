@@ -1,12 +1,12 @@
 export default {
     location: [
         {name: 'All', val: 'all'},
+        {name: 'Pier', val: 'Pier'},
+        {name: 'Pond', val: 'Pond'},
         {name: 'River', val: 'River'},
         {name: 'River Clifftop', val: 'R-Clifftop'},
         {name: 'River Mouth', val: 'R-Mouth'},
-        {name: 'Sea', val: 'Sea'},
-        {name: 'Pier', val: 'Pier'},
-        {name: 'Pond', val: 'Pond'},
+        {name: 'Sea', val: 'Sea'}
     ],
     hemisphere:[
         {name: 'North', val: true},

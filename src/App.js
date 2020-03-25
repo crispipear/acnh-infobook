@@ -18,37 +18,34 @@ function App() {
   const [avai, setAvai] = useState(1) //availability
 
   useEffect(() => {
-    loadData();
     // getData();
     // create();
   }, [])
 
-  function loadData(){
-    setData(FishData);
-  }
-
   useEffect(() => {
-    if(loc == 'all'){
-      setData(dataset);
-    }else{
-      let filtered = filterData('location', loc);
-      setData(filtered);
+    let filtered = Object.assign({}, dataset);
+    if(loc !== 'all'){
+      Object.keys(filtered).forEach(key => {// filter location
+        if (filtered[key].location !== loc) delete filtered[key];
+      })
     }
-  }, [loc])
-
-  useEffect(() => {
-    if(avai == 1){
-      //all
-      setData(dataset);
-    }else if(avai == 2){
-      //over after this month
-      let curMonth = new Date().getMonth() + 1;
-      let filtered = filterData('month', curMonth);
-      setData(filtered);
-    }else if (avai == 3){
-      //at this time
+    if(avai !== 1){
+      Object.keys(filtered).forEach(key => {// filter availability
+        if(avai == 2){ // filter month ending soon
+          if(filtered[key].allYear){
+            delete filtered[key];
+          }else{
+            let curMonth = new Date().getMonth() + 1;
+            let months = north ? filtered[key].monthsN : filtered[key].monthsS;
+            if(!months.includes(curMonth) || months.includes(curMonth+1)) delete filtered[key];
+          }
+        }else if(avai == 3){ //filter available now
+          if(!getAvailability(filtered[key], north)) delete filtered[key]
+        }
+      })
     }
-  }, [avai])
+    setData(filtered);
+  }, [loc, avai, north])
 
   useEffect(() => {
     // let dataset = type == 'fish' ? FishData : BugsData
@@ -57,29 +54,22 @@ function App() {
     setData(dataset);
   }, [type])
 
-  function filterData(targetKey, targetVal){
-    let filtered = Object.assign({}, dataset);
-    Object.keys(filtered).forEach(key => {
-      if(targetKey == 'location'){
-        if (filtered[key][targetKey] !== targetVal) delete filtered[key];
-      }else if(targetKey == 'month'){
-        if(filtered[key].allYear){
-          delete filtered[key];
-        }else{
-          let months = north ? filtered[key].monthsN : filtered[key].monthsS;
-          if(!months.includes(targetVal) || months.includes(targetVal+1)) delete filtered[key];
-        }
-      }else if(targetKey == 'now'){
-
-      }
-    });
-    return filtered;
+  function search(e){
+    if(e.keyCode == 13){
+      let filtered = Object.assign({}, dataset);
+      let userInput = document.getElementById('search-input').value;
+      Object.keys(filtered).forEach(key => {
+        let name = filtered[key].name.toLowerCase();
+        if(!name.includes(userInput.toLowerCase())) delete filtered[key];
+      })
+      setData(filtered)
+    }
   }
 
   return (
     <div className="App">
       <div id="bg-pattern"/>
-      <Menu type={type} setType={setType} setNorth={setNorth} setLoc={setLoc} setAvai={setAvai}/>
+      <Menu type={type} setType={setType} setNorth={setNorth} setLoc={setLoc} setAvai={setAvai} search={search}/>
       <Header/>
       <Main data={data} north={north} type={type}/>
     </div>

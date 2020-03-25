@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LOGO from '../assets/logo.png';
+import LOGO2 from '../assets/logo2.png';
 
 const dateOption = {
     year: 'numeric',
@@ -39,6 +40,7 @@ export default function Header(props) {
             </div>
             <div className='right'>
                 <h4>Current Time: {timerText}</h4>
+                <img src={LOGO2} alt='logo'/>
             </div>
         </div>
     );
