@@ -105,15 +105,15 @@ function App() {
   }
 
   function search(e){
-    if(e.keyCode == 13){
+      let userInput = document.getElementById('search-input').value.toLowerCase();
       let filtered = Object.assign({}, dataset);
-      let userInput = document.getElementById('search-input').value;
-      Object.keys(filtered).forEach(key => {
-        let name = filtered[key].name.toLowerCase();
-        if(!name.includes(userInput.toLowerCase())) delete filtered[key];
-      })
+      if(userInput.length > 0){
+        Object.keys(filtered).forEach(key => {
+          let name = filtered[key].name.toLowerCase();
+          if(!name.includes(userInput)) delete filtered[key];
+        })
+      }
       setData(filtered)
-    }
   }
 
   return (

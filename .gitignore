@@ -2,6 +2,7 @@
 
 .env
 **/db/
+.firebase/
 
 # dependencies
 /node_modules

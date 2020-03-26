@@ -31,7 +31,7 @@ export default function Menu(props) {
             </div>
             <div className='menu-group'>
                 <h6>Search</h6>
-                <input id="search-input" onKeyDown={props.search} type="text"/>
+                <input id="search-input" onKeyUp={props.search} type="text"/>
             </div>
         </div>
     );
