@@ -3,12 +3,19 @@ import Dropdown from './Dropdown';
 import Options from '../utils/options';
 
 export default function Menu(props) {
+    const [locationData, setLocationData] = useState(Options.location[props.type]);
+
+    useEffect(() => {
+        setLocationData(
+            Options.location[props.type]
+        )
+    }, [props.type])
     return (
         <div id='menu'>
             <div className='menu-group'>
                 <h6>Type</h6>
                 <button onClick={() => props.setType('fish')}className={props.type=='fish' ? 'btn-active': ''}>FISH</button>
-                <button onClick={()=>alert('not done yet')} className={props.type=='bugs' ? 'btn-active': ''}>BUGS</button>
+                <button onClick={()=> props.setType('bugs')} className={props.type=='bugs' ? 'btn-active': ''}>BUGS</button>
             </div>
             <div className='menu-group'>
                 <h6>Hemisphere</h6>
@@ -16,7 +23,7 @@ export default function Menu(props) {
             </div>
             <div className='menu-group'>
                 <h6>Location</h6>
-                <Dropdown items={Options.location} setValue={props.setLoc}/>
+                <Dropdown items={locationData} setValue={props.setLoc} resetTrigger={props.type}/>
             </div>
             <div className='menu-group'>
                 <h6>Availability</h6>

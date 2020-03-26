@@ -6,9 +6,11 @@ import getAvailability from './utils/availability';
 
 import Header  from './components/Header';
 import Main    from './components/Main';  
-import Menu    from './components/Menu';     
+import Menu    from './components/Menu';
+import Credits from './components/Credits';
 
 function App() {
+  const [showCredits, setShowCredits] = useState(false);
   const [fbData, setFbData] = useState({fish: {}, bugs: {}})
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState({});
@@ -17,6 +19,7 @@ function App() {
   const [north, setNorth] = useState(true); //hemsphere location
   const [loc, setLoc] = useState('all'); //location
   const [avai, setAvai] = useState(1) //availability
+  
 
   useEffect(() => {
     fetchData();
@@ -32,9 +35,15 @@ function App() {
   useEffect(() => {
     let filtered = Object.assign({}, dataset);
     if(loc !== 'all'){
-      Object.keys(filtered).forEach(key => {// filter location
-        if (filtered[key].location !== loc) delete filtered[key];
-      })
+      if(Array.isArray(loc)){
+        Object.keys(filtered).forEach(key => {// filter location
+          if (!loc.includes(filtered[key].location)) delete filtered[key];
+        })
+      }else{
+        Object.keys(filtered).forEach(key => {// filter location
+          if (filtered[key].location !== loc) delete filtered[key];
+        })
+      }
     }
     if(avai !== 1){
       Object.keys(filtered).forEach(key => {// filter availability
@@ -55,10 +64,18 @@ function App() {
   }, [loc, avai, north])
 
   useEffect(() => {
+    setDataOnType();
+  }, [fbData])
+
+  useEffect(() => {
+    setDataOnType();
+  }, [type])
+
+  function setDataOnType(){
     let dataset = type == 'fish' ? fbData.fish : fbData.bugs;
     setDataset(dataset);
     setData(dataset);
-  }, [fbData])
+  }
 
   function search(e){
     if(e.keyCode == 13){
@@ -75,8 +92,9 @@ function App() {
   return (
     <div className="app">
       <div id="bg-pattern"/>
+      {showCredits && <Credits setShowCredits={setShowCredits} showCredits={showCredits}/>}
       <Menu type={type} setType={setType} setNorth={setNorth} setLoc={setLoc} setAvai={setAvai} search={search}/>
-      <Header/>
+      <Header setShowCredits={setShowCredits}/>
       <Main data={data} north={north} type={type} loaded={loaded}/>
     </div>
   );

@@ -28,7 +28,7 @@ export default function Main(props) {
                             <div className="list-col"><span>{data[item].price || 'N/A'}</span></div>
                             <div className="list-col"><span>{data[item].location || 'N/A'}</span></div>
                             <div className="list-col"><span>{data[item].size ? size[data[item].size] : 'N/A'}</span></div>
-                            <div className="list-col"><span>{time[data[item].time - 1]}</span></div>
+                            <div className="list-col"><span>{time[props.type][data[item].time - 1]}</span></div>
                             <div className="list-col">
                                 {
                                     data[item].allYear
