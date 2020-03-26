@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Package from '../../package.json';
 import LOGO from '../assets/logo.png';
 import LOGO2 from '../assets/logo2.png';
 
@@ -23,6 +24,7 @@ export default function Credits(props) {
                 <p>
                     powered by: React + Firebase
                 </p>
+                <h6 style={{textAlign: 'right', fontSize: '0.8rem', opacity: 0.5}}>v.{Package.version}</h6>
             </div>
         </div>
     );

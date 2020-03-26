@@ -38,5 +38,11 @@ export default {
             {double: true, falseRange: [9,10,11,12,13,14,15,20,21,22,23,0]},// 17 = 4 AM - 8 AM, 4 PM - 7 PM
             {double: true, falseRange: [9,10,11,12,13,14,15,16,20,21,22,23,0]}// 18 = 4 AM - 8 AM, 5 PM - 7 PM
         ]
+    },
+    seasons: {
+        "4": [3,4,5], //spring
+        "5": [6,7,8], //summer
+        "6": [9,10,11], //fall
+        "7": [12,1,2]   //winter
     }
 }

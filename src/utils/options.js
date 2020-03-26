@@ -31,7 +31,11 @@ export default {
     ],
     availability: [
         {name: 'All', val: 1},
-        {name: 'Over soon', val: 2},
-        {name: 'Right now', val: 3}
+        {name: 'Right now', val: 2},
+        {name: 'Over soon', val: 3},
+        {name: 'Spring', val: 4},
+        {name: 'Summer', val: 5},
+        {name: 'Fall', val: 6},
+        {name: 'Winter', val: 7}
     ],
 }

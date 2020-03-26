@@ -5,10 +5,33 @@ import Month from './Month';
 
 const listHeader = ['','Name', 'Price', 'Location', 'Size', 'Time', 'Month', 'Now?']
 
-export default function Main(props) {
-    const {time, size} = Helpers;
-    const data = props.data;
+const ListItem = ({data, north, type}) => 
+    <div className="list-item">
+        <div className="list-col">
+            <img src={data.img} alt={data.name}/>
+        </div>
+        <div className="list-col"><span>{data.name}</span></div>
+        <div className="list-col"><span>{data.price || ''}</span></div>
+        <div className="list-col"><span>{data.location || ''}</span></div>
+        <div className="list-col"><span>{data.size ? Helpers.size[data.size] : ''}</span></div>
+        <div className="list-col"><span>{Helpers.time[type][data.time - 1]}</span></div>
+        <div className="list-col">
+            {
+                data.allYear
+                ? <span>All year</span>
+                : <Month highlight={north ? data.monthsN : data.monthsS}/>
+            }
+        </div>
+        <div className="list-col">
+                {
+                    getAvailability(data, north, type)
+                    ? <span className="text-hl">YAS</span>
+                    : <span className="text-d">No</span>
+                }
+        </div>
+    </div>
 
+export default function Main(props) {
     return (
         <div id="main">
             <div id="list">
@@ -19,31 +42,8 @@ export default function Main(props) {
                 </div>
                 {
                     props.loaded?
-                    Object.keys(data).map(item => 
-                        <div className="list-item" key={item}>
-                            <div className="list-col">
-                                <img src={data[item].img} alt={data[item].name}/>
-                            </div>
-                            <div className="list-col"><span>{data[item].name}</span></div>
-                            <div className="list-col"><span>{data[item].price || 'N/A'}</span></div>
-                            <div className="list-col"><span>{data[item].location || 'N/A'}</span></div>
-                            <div className="list-col"><span>{data[item].size ? size[data[item].size] : 'N/A'}</span></div>
-                            <div className="list-col"><span>{time[props.type][data[item].time - 1]}</span></div>
-                            <div className="list-col">
-                                {
-                                    data[item].allYear
-                                    ? <span>All year</span>
-                                    : <Month highlight={props.north ? data[item].monthsN : data[item].monthsS}/>
-                                }
-                            </div>
-                            <div className="list-col">
-                                    {
-                                        getAvailability(data[item], props.north, props.type)
-                                        ? <span className="text-hl">YAS</span>
-                                        : <span className="text-d">No</span>
-                                    }
-                            </div>
-                        </div>
+                    Object.keys(props.data).map(item => 
+                        <ListItem data={props.data[item]} key={item} north={props.north} type={props.type}/>
                     )
                     :
                     <div id="loader">

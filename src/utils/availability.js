@@ -21,15 +21,17 @@ function getAvailability(item, north, type){
 }
 
 function withinTime(time, type){
-    let curHour = new Date().getHours();
     let timeRange = Helpers.timeRanges[type][time - 1];
-    if(timeRange.double){
-        return !timeRange.falseRange.includes(curHour)
-    }
-    if(timeRange.res){
-        return (curHour >= timeRange.min && curHour <= timeRange.max)
-    }else{
-        return (curHour >= timeRange.min || curHour <= timeRange.max)
+    if(timeRange){
+        let curHour = new Date().getHours();
+        if(timeRange.double){
+            return !timeRange.falseRange.includes(curHour)
+        }
+        if(!timeRange.res){
+            return (curHour >= timeRange.min && curHour < timeRange.max)
+        }else{
+            return (curHour >= timeRange.min || curHour < timeRange.max)
+        }
     }
 }
 
