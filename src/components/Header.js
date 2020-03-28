@@ -36,7 +36,7 @@ export default function Header(props) {
         <div id='header'>
             <div className='left'>
                 <img src={LOGO} alt='logo'/>
-                <h1 style={{cursor: 'pointer'}} onClick={() => props.setShowCredits(true)}>ACNH Info Book</h1>
+                <h1 style={{cursor: 'pointer'}} onClick={() => props.setShowCredits(true)}>Nookie's Book</h1>
             </div>
             <div className='right'>
                 <h4>Current Time: {timerText}</h4>
