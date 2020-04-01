@@ -33,9 +33,10 @@ export default {
         {name: 'All', val: 1},
         {name: 'Right now', val: 2},
         {name: 'Over soon', val: 3},
-        {name: 'Spring', val: 4},
-        {name: 'Summer', val: 5},
-        {name: 'Fall', val: 6},
-        {name: 'Winter', val: 7}
+        {name: 'New', val: 4},
+        {name: 'Spring', val: 11},
+        {name: 'Summer', val: 12},
+        {name: 'Fall', val: 13},
+        {name: 'Winter', val: 14}
     ],
 }

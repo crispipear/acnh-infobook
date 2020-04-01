@@ -71,7 +71,15 @@ function App() {
             let months = north ? filtered[key].monthsN : filtered[key].monthsS;
             if(!months.includes(curMonth) || months.includes(curMonth+1)) delete filtered[key];
           }
-        }else if(avai == 4 || avai == 5 || avai == 6 || avai == 7){ //by seasons
+        }else if(avai == 4){//filter new this month
+          if(filtered[key].allYear){
+            delete filtered[key];
+          }else{
+            let curMonth = new Date().getMonth() + 1;
+            let months = north ? filtered[key].monthsN : filtered[key].monthsS;
+            if(!months.includes(curMonth) || months.includes(curMonth-1)) delete filtered[key];
+          }
+        }else if(avai == 11 || avai == 12 || avai == 13 || avai == 14){ //by seasons
           if(!filtered[key].allYear){
             let months = north ? filtered[key].monthsN : filtered[key].monthsS;
             if(!months.some(r=> Helpers.seasons[avai].includes(r))) delete filtered[key];
