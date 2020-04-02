@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './styles/global.scss';
 
 import {getData, create} from './utils/fb';
@@ -23,10 +23,16 @@ function App() {
   const [north, setNorth] = useState(true); //hemsphere location
   const [loc, setLoc] = useState('all'); //location
   const [avai, setAvai] = useState(1) //availability
+  const [, updateState] = React.useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
   
 
   useEffect(() => {
     init();
+    window.addEventListener('resize', forceUpdate);
+    return () => {
+      window.removeEventListener('resize', forceUpdate);
+    }
     // create();
   }, [])
 

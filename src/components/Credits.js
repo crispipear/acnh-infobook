@@ -24,7 +24,10 @@ export default function Credits(props) {
                 <p>
                     powered by: React + Firebase
                 </p>
-                <h6 style={{textAlign: 'right', fontSize: '0.8rem', opacity: 0.5}}>v.{Package.version}</h6>
+                <p>
+                    Disclaimer: Nookie's Book is a personal project and  is neither owned by nor affiliated with Nintendo or the creators of Animal Crossing in any way.
+                </p>
+                <h6 style={{textAlign: 'right', fontSize: '0.8rem', opacity: 0.5}}>Nookie's Book v.{Package.version}</h6>
             </div>
         </div>
     );

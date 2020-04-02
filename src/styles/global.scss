@@ -524,7 +524,7 @@ input{
 
 #credits-container{
   width: 50%;
-  height: 52vh;
+  height: 60vh;
   z-index: 1;
   box-sizing: border-box;
   padding: 2rem;
@@ -542,13 +542,13 @@ input{
   @include tablet{
     padding: 24px;
     width: 60%;
-    height: 56vh;
-    height: calc(var(--vh, 1vh) * 56);
+    height: 76vh;
+    height: calc(var(--vh, 1vh) * 76);
 
   }
   @include mobile{
     width: 84%;
-    height: 76vh;
-    height: calc(var(--vh, 1vh) * 76);
+    height: 90vh;
+    height: calc(var(--vh, 1vh) * 90);
   }
 }
