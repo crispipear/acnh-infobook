@@ -10,6 +10,9 @@ import Main    from './components/Main';
 import Menu    from './components/Menu';
 import Credits from './components/Credits';
 
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+
 function App() {
   const [showCredits, setShowCredits] = useState(false);
   const [fbData, setFbData] = useState({})
