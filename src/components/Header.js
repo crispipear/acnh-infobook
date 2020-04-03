@@ -43,7 +43,8 @@ export default function Header(props) {
         <div id='header'>
             <div className='left'>
                 <img src={LOGO} alt='logo'/>
-                <h1 style={{cursor: 'pointer'}} onClick={() => props.setShowCredits(true)}>Nookie's Book</h1>
+                <h1 style={{cursor: 'pointer'}} onClick={() => props.setPanel(0)}>Nookie's Book</h1>
+                <span style={{cursor: 'pointer'}} onClick={() => props.setShowCredits(true)}>About</span>
             </div>
            {
                window.innerWidth <= 1100 ?

@@ -62,7 +62,7 @@ const ListItemMobile = ({data, north, type, bgColor}) =>
     </div>
 </div>
 
-export default function Main(props) {
+export default function CritterpediaMain(props) {
     function congruMod(num){
         //check if incoming *num* is congruent to 2 or 3 mod 4.
         //this formula is for tablet list item background color
@@ -76,7 +76,7 @@ export default function Main(props) {
     }
 
     return (
-        <div id="main">
+        <section id="main">
             <div id="list">
                 {
                     window.innerWidth > 1100 &&
@@ -100,6 +100,6 @@ export default function Main(props) {
                     </div>
                 }
             </div>
-        </div>
+        </section>
     );
 }

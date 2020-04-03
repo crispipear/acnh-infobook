@@ -6,7 +6,6 @@ $background: #FFFEFD;
 $text: #336367;
 $secGreen: #e0f6f7;
 $gray: #CCDBDD;
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -153,7 +152,7 @@ h6{font-size: 0.9rem}
   }
 }
 
-#main{
+section{
   @extend .container;
   background: $background;
   outline: 0.5rem $primBlue solid;
@@ -162,12 +161,67 @@ h6{font-size: 0.9rem}
   -webkit-overflow-scrolling: touch;
   height: 80vh;
   bottom: 0%;
-  position: fixed;
+  position: absolute;
   @include tablet{
     height: 84vh;
     height: calc(var(--vh, 1vh) * 84);
   }
 }
+
+#app-selection{
+  background: transparent;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  @include mobile{
+    flex-direction: column;
+  }
+}
+
+.selection{
+  cursor: pointer;
+  width: 30%;
+  height: 50vh;
+  background: $background;
+  margin-top: -8vh;
+  &:hover .selection-img{
+    opacity: 0.8;
+  }
+  &:not(:first-of-type){
+    margin-left: 4%;
+  }
+  @include tablet{
+    width: 50%;
+  }
+  @include mobile{
+    width: 50%;
+    height: 40vh;
+    &:not(:first-of-type){
+      margin: 4% 0 0 0;
+    }
+  }
+}
+.selection-text{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  h4{
+    text-align: center;
+  }
+}
+
+.selection-img{
+  width: 100%;
+  height: 75%;
+  background: $primBlue;
+  transition: opacity 0.2s;
+}
+
 
 #list{
   position: absolute;
@@ -280,19 +334,22 @@ h6{font-size: 0.9rem}
   z-index: 1;
   position: fixed;
   left: 6%;
-  bottom: 0;
   width: 15%;
-  height: 80%;
+  bottom: 0%;
+  height: 80vh;
   border-right: $gray 1px solid;
+  transform: translateZ(0);
   @include tablet{
-    width: 0%;
-    height: 12vh;
-    height: calc(var(--vh, 1vh) * 12);
+    width: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     top: 0%;
     left: 0%;
+    pointer-events: none;
   }
 }
 #menu-container{
+  pointer-events: all;
   box-sizing: border-box;
   padding: 1rem;
   height: 100%;
@@ -311,6 +368,7 @@ h6{font-size: 0.9rem}
 }
 
 #menu-icon{
+  pointer-events: all;
   position: fixed;
   z-index: 5;
   top: 5%;

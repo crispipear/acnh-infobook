@@ -4,7 +4,7 @@ import Options      from '../utils/options';
 import ICON_MENU    from '../assets/icon-menu.svg';
 import ICON_CLOSE   from '../assets/icon-close.svg';
 
-export default function Menu(props) {
+export default function CritterpediaMenu(props) {
     const [locationData, setLocationData] = useState(Options.location[props.type]);
     const [menuToggle, setMenuToggle] = useState(false);
     const [menuStyle, setMenuStyle] = useState({pointerEvents: 'none', opacity: 0})
@@ -51,7 +51,7 @@ export default function Menu(props) {
                 </div>
                 <div className='menu-group'>
                     <h6>Availability</h6>
-                    <Dropdown items={Options.availability} setValue={props.setAvai}/>
+                    <Dropdown items={Options.availability} setValue={props.setAvai} resetTrigger={props.type}/>
                 </div>
                 <div className='menu-group'>
                     <h6>Search</h6>
