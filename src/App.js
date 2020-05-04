@@ -16,7 +16,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const [, updateState] = React.useState();
   const forceUpdate = useCallback(() => updateState({}), []);
-  const [panel, setPanel] = useState(0); //0 = selection, 1 = Critterpedia, 2 = Villagers
+  const [panel, setPanel] = useState(1); //0 = selection, 1 = Critterpedia, 2 = Villagers
 
   useEffect(() => {
     init();

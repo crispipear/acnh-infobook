@@ -1,13 +1,44 @@
 import Helpers from './helpers';
 
-function getAvailability(item, north, type){
+function generateTags(item, north, type){
+    let tags = [];
+    if(availableNow(item, north, type)){
+        tags.push({text: 'now', class: 'tag-now'})
+    }
+    if(newThisMonth(item, north)){
+        tags.push({text: 'new', class: 'tag-new'})
+    }
+    if(overSoon(item, north)){
+        tags.push({text: 'over soon', class: 'tag-oversoon'})
+    }
+    return tags
+}
+
+function overSoon(item, north){
+    if(item.allYear){
+        return false;
+    }
+    let curMonth = new Date().getMonth() + 1;
+    let months = north ? item.monthsN : item.monthsS;
+    return !months.includes(curMonth+1) && months.includes(curMonth);
+}
+
+function newThisMonth(item, north){
+    if(item.allYear){
+        return false;
+    }
+    let curMonth = new Date().getMonth() + 1;
+    let months = north ? item.monthsN : item.monthsS;
+    return !months.includes(curMonth-1) && months.includes(curMonth);
+}
+
+function availableNow(item, north, type){
     if(item.allYear){
         if(item.time == 1){
             return true
         }else if(withinTime(item.time, type)){
             return true
         }
-
     }
     if(!item.allYear){
         let months = north ? item.monthsN : item.monthsS;
@@ -40,4 +71,9 @@ function withinMonth(months){
     return months.includes(curMonth)
 }
 
-export default getAvailability
+export {
+    generateTags,
+    overSoon,
+    availableNow,
+    newThisMonth,
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 
-import getAvailability from '../utils/availability';
+import {availableNow, newThisMonth, overSoon} from '../utils/availability';
 import Helpers from '../utils/helpers';
 
 import Main    from './CritterpediaMain';  
@@ -46,22 +46,14 @@ function Critterpedia(props) {
     if(avai !== 1){
       Object.keys(filtered).forEach(key => {// filter availability
         if(avai == 2){ //filter available now
-          if(!getAvailability(filtered[key], north, type)) delete filtered[key]
+          if(!availableNow(filtered[key], north, type)) delete filtered[key]
         }else if(avai == 3){ //filter month ending soon
-          if(filtered[key].allYear){
-            delete filtered[key];
-          }else{
-            let curMonth = new Date().getMonth() + 1;
-            let months = north ? filtered[key].monthsN : filtered[key].monthsS;
-            if(!months.includes(curMonth) || months.includes(curMonth+1)) delete filtered[key];
+          if(!overSoon(filtered[key], north)){
+            delete filtered[key]
           }
         }else if(avai == 4){//filter new this month
-          if(filtered[key].allYear){
-            delete filtered[key];
-          }else{
-            let curMonth = new Date().getMonth() + 1;
-            let months = north ? filtered[key].monthsN : filtered[key].monthsS;
-            if(!months.includes(curMonth) || months.includes(curMonth-1)) delete filtered[key];
+          if(!newThisMonth(filtered[key], north)){
+            delete filtered[key]
           }
         }else if(avai == 11 || avai == 12 || avai == 13 || avai == 14){ //by seasons
           if(!filtered[key].allYear){
