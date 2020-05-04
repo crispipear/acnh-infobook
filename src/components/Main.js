@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Helpers from '../utils/helpers';
-import getAvailability from '../utils/availability';
+import {generateTags} from '../utils/availability';
 import Month from './Month';
 
-const listHeader = ['','Name', 'Price', 'Location', 'Size', 'Time', 'Month', 'Now?']
+const listHeader = ['','Name', 'Price', 'Location', 'Size', 'Time', 'Month', 'Tags']
 const bg = 'rgba(204, 219, 221, 0.15)'
 const ListItem = ({data, north, type, bgColor}) => 
     <div className="list-item" style={{backgroundColor: bgColor ? bg : 'white'}}>
@@ -22,12 +22,10 @@ const ListItem = ({data, north, type, bgColor}) =>
                 : <Month highlight={north ? data.monthsN : data.monthsS}/>
             }
         </div>
-        <div className="list-col">
-                {
-                    getAvailability(data, north, type)
-                    ? <span className="text-hl">YAS</span>
-                    : <span className="text-d">No</span>
-                }
+        <div className="list-col tags">
+            {generateTags(data, north, type).map((tag,key) =>
+                <span key={key} className={tag.class}>{tag.text}</span>    
+            )}
         </div>
     </div>
 
@@ -52,13 +50,10 @@ const ListItemMobile = ({data, north, type, bgColor}) =>
             : <Month highlight={north ? data.monthsN : data.monthsS}/>
         }
     </div>
-    <div className="list-col">
-        <span>Available now?</span>
-        {
-            getAvailability(data, north, type)
-            ? <span className="text-hl">YAS</span>
-            : <span className="text-d">No</span>
-        }
+    <div className="list-col tags">
+        {generateTags(data, north, type).map((tag, key) =>
+            <span key={key} className={tag.class}>{tag.text}</span>    
+        )}
     </div>
 </div>
 
