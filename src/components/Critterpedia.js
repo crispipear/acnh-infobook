@@ -1,7 +1,6 @@
 import React, { useEffect, useState} from 'react';
 
-import {availableNow, newThisMonth, overSoon} from '../utils/availability';
-import Helpers from '../utils/helpers';
+import {availabilityStatus} from '../utils/availability';
 
 import Main    from './CritterpediaMain';  
 import Menu    from './CritterpediaMenu';
@@ -43,24 +42,10 @@ function Critterpedia(props) {
         })
       }
     }
-    if(avai !== 1){
+    if(avai !== 0){
       Object.keys(filtered).forEach(key => {// filter availability
-        if(avai == 2){ //filter available now
-          if(!availableNow(filtered[key], north, type)) delete filtered[key]
-        }else if(avai == 3){ //filter month ending soon
-          if(!overSoon(filtered[key], north)){
-            delete filtered[key]
-          }
-        }else if(avai == 4){//filter new this month
-          if(!newThisMonth(filtered[key], north)){
-            delete filtered[key]
-          }
-        }else if(avai == 11 || avai == 12 || avai == 13 || avai == 14){ //by seasons
-          if(!filtered[key].allYear){
-            let months = north ? filtered[key].monthsN : filtered[key].monthsS;
-            if(!months.some(r=> Helpers.seasons[avai].includes(r))) delete filtered[key];
-          }
-        }
+        let status = availabilityStatus(filtered[key], north, type);
+        if(!status.includes(avai)) delete filtered[key];
       })
     }
     setData(filtered);

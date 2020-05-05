@@ -30,13 +30,14 @@ export default {
         {name: 'South', val: false},
     ],
     availability: [
-        {name: 'All', val: 1},
-        {name: 'Right now', val: 2},
+        {name: 'All', val: 0},
+        {name: 'Right now', val: 1},
+        {name: 'This month', val: 2},
         {name: 'Over soon', val: 3},
         {name: 'New', val: 4},
-        {name: 'Spring', val: 11},
-        {name: 'Summer', val: 12},
-        {name: 'Fall', val: 13},
-        {name: 'Winter', val: 14}
+        {name: 'Spring', val: 5},
+        {name: 'Summer', val: 6},
+        {name: 'Fall', val: 7},
+        {name: 'Winter', val: 8}
     ],
 }

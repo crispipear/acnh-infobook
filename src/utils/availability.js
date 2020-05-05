@@ -2,53 +2,66 @@ import Helpers from './helpers';
 
 function generateTags(item, north, type){
     let tags = [];
-    if(availableNow(item, north, type)){
-        tags.push({text: 'now', class: 'tag-now'})
+    let status = availabilityStatus(item, north, type);
+    if(status.includes(1)){
+        tags.push({text: 'now', class: 'tag-now'});
     }
-    if(newThisMonth(item, north)){
-        tags.push({text: 'new', class: 'tag-new'})
+    if(!status.includes(2)){
+        tags.push({text: 'unavailable', class: 'tag-unavai'})
     }
-    if(overSoon(item, north)){
+    if(status.includes(3)){
         tags.push({text: 'over soon', class: 'tag-oversoon'})
     }
+    if(status.includes(4)){
+        tags.push({text: 'new', class: 'tag-new'})
+    }
+
     return tags
 }
 
-function overSoon(item, north){
-    if(item.allYear){
-        return false;
-    }
+function availabilityStatus(item, north, type){
+    //statusType: 
+    //1 = available at the very moment
+    //2 = available this month
+    //3 = over soon
+    //4 = new this month
+    //5 = spring
+    //6 = summer
+    //7 = autumn
+    //8 = winter
+
+    let status = []
     let curMonth = new Date().getMonth() + 1;
     let months = north ? item.monthsN : item.monthsS;
-    return !months.includes(curMonth+1) && months.includes(curMonth);
-}
-
-function newThisMonth(item, north){
     if(item.allYear){
-        return false;
-    }
-    let curMonth = new Date().getMonth() + 1;
-    let months = north ? item.monthsN : item.monthsS;
-    return !months.includes(curMonth-1) && months.includes(curMonth);
-}
-
-function availableNow(item, north, type){
-    if(item.allYear){
+        status.push(2);
         if(item.time == 1){
-            return true
+            status.push(1);
         }else if(withinTime(item.time, type)){
-            return true
+            status.push(1);
         }
-    }
-    if(!item.allYear){
-        let months = north ? item.monthsN : item.monthsS;
+    }else{
         if(withinMonth(months)){
+            status.push(2);
             if(item.time == 1 || withinTime(item.time, type)){
-                return true
+                status.push(1);
+            }
+            if(!months.includes(curMonth+1)){
+                status.push(3);
+            }
+            if(!months.includes(curMonth-1)){
+                status.push(4);
             }
         }
+        //check seasons
+        [5,6,7,8].map(seasonNum => {
+            if(months.some(m => Helpers.seasons[seasonNum].includes(m))){
+                status.push(seasonNum)
+            }
+        })
     }
-    return false;
+
+    return status;
 }
 
 function withinTime(time, type){
@@ -73,7 +86,5 @@ function withinMonth(months){
 
 export {
     generateTags,
-    overSoon,
-    availableNow,
-    newThisMonth,
+    availabilityStatus
 }

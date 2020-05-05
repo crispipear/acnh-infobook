@@ -27,25 +27,32 @@ const fire = firebase.initializeApp(config);
 
 const firestore = fire.firestore();
 
-async function getData(dataSetter){
-    let data = {}
-    let fishData = {}
-    let bugsData = {}
-    const fcolData = await firestore.collection('fish').get()
-    fcolData.docs.map(doc => {
-        fishData[doc.id] = doc.data();
-        fishData[doc.id].img = `https://firebasestorage.googleapis.com/v0/b/nookiesbook.appspot.com/o/fish%2F${doc.id}.png?alt=media`
+async function getVersions(){
+    let verData = {};
+    const verColData = await firestore.collection('versions').get();
+    verColData.docs.map(doc => {
+        verData[doc.id] = doc.data();
     })
-    const bcolData = await firestore.collection('bugs').get()
-    bcolData.docs.map(doc => {
-        bugsData[doc.id] = doc.data();
-        bugsData[doc.id].img = `https://firebasestorage.googleapis.com/v0/b/nookiesbook.appspot.com/o/bugs%2F${doc.id}.png?alt=media`
-    })
-    data = {
-        fish: fishData,
-        bugs: bugsData
+    return verData;
+}
+
+async function getData(outdated=[]){
+    console.log('fetching data from firebase...');
+    if(outdated.length === 0){
+        outdated = ['fish', 'bugs'];
     }
-    dataSetter(data)
+    let data = {}
+    for(let i=0; i<outdated.length; i++){
+        let item = outdated[i];
+        let tempColData = await firestore.collection(item).get();
+        let tempData = {};
+        tempColData.docs.map(doc => {
+            tempData[doc.id] = doc.data();
+            tempData[doc.id].img = `https://firebasestorage.googleapis.com/v0/b/nookiesbook.appspot.com/o/${item}%2F${doc.id}.png?alt=media`
+        })
+        data[item] = tempData;
+    }
+    return data;
 }
 function create(){
     // bulk create data from local json..
@@ -62,5 +69,6 @@ function create(){
 
 export {
     create,
+    getVersions,
     getData
 }

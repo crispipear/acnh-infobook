@@ -3,7 +3,7 @@ import Helpers from '../utils/helpers';
 import {generateTags} from '../utils/availability';
 import Month from './Month';
 
-const listHeader = ['','Name', 'Price', 'Location', 'Size', 'Time', 'Month', 'Tags']
+const listHeader = ['','Name', 'Price', 'Location', 'Size', 'Time', 'Month', 'Tag(s)']
 const bg = 'rgba(204, 219, 221, 0.15)'
 const ListItem = ({data, north, type, bgColor}) => 
     <div className="list-item" style={{backgroundColor: bgColor ? bg : 'white'}}>
